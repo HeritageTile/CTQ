@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Customizer (Bootstrap)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="start-script.css">
+</head>
+<body>
+
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm rounded mt-1">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Heritage Tiles</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <div id="main-nav" class="navbar-nav mx-auto">
+                        <a href="#" class="nav-link" data-view="inspirations">Inspirations</a>
+                        <a href="#" class="nav-link" data-view="field-type">Field Type</a>
+                        <a href="#" class="nav-link" data-view="corners">Corners</a>
+                        <a href="#" class="nav-link" data-view="base">Base</a>
+                        <a href="#" class="nav-link" data-view="cap-type">Cap Type</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <main id="main-content" class="container">
+                    </main>
+
+
+    <template id="inspirations">
+        <div class="text-center">
+            <h1 class="display-5">Inspiration Gallery</h1>
+            <p class="lead text-muted">Browse these images to get ideas for your project.</p>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-4 mb-3">
+                <img src="banner image.png" class="img-fluid rounded" alt="Inspiration 1">
+            </div>
+            <div class="col-md-4 mb-3">
+                <img src="inspirations-2.jpg" class="img-fluid rounded" alt="Inspiration 2">
+            </div>
+            <div class="col-md-4 mb-3">
+                <img src="https://via.placeholder.com/400x300.png/E9ECEF/495057?text=Style+3" class="img-fluid rounded" alt="Inspiration 3">
+            </div>
+        </div>
+    </template>
+
+    <template id="field-type">
+        <div class="container my-5">
+        <nav class="navigation-arrows mb-4">
+            <a href="consult-start.html" class="btn btn-secondary">&larr; Back</a>
+            <!--a href="contact.html" class="btn btn-primary">Next&rarr;</a-->
+        </nav>
+        <div class="row align-items-center">
+            <div class="col-lg-8 mb-4 mb-lg-0">
+                <img src="TileShape.png" class="img-fluid rounded shadow" alt="Tiled room">
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card p-4 shadow-sm">
+                    <h1 class="h3 mb-3">Tile Calculator</h1>
+                    <form id="tileForm">
+                        <div class="mb-3">
+                            <label for="areaInput" class="form-label">Total Area (sq ft)</label>
+                            <input type="number" class="form-control" id="areaInput" placeholder="e.g., 120" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tileSelect" class="form-label">Select Tile Size</label>
+                            <select class="form-select" id="tileSelect">
+                                <option value="0.25">6" x 6" (66FT00)</option>
+                                <option value="0.375">9" x 6" (69FT00)</option>
+                                <option value="0.125">4 1/4" x 4.25" (44FT00)</option>
+                                <option value="0.083">2" x 6" (25FT00)</option>
+                                <option value="0.125">3" x 6" (36FT00)</option>
+                                <option value="0.090">2 3/5" x 5" (33FT00)</option>
+                                <option value="0.028">2" x 2" (36FT00)</option>
+                                <option value="0.063">3" x 3" (36FT00)</option>
+                                <option value="0.063">3" x 3" (33BV00)</option>
+                            </select>
+                        </div>  
+                        <button type="submit" class="btn btn-primary w-100">Calculate</button>
+                    </form>
+                    <div id="result" class="alert mt-4" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="tile-calculator.js"></script>
+    </template>
+
+    <template id="corners">
+        <div class="text-center">
+            <h1 class="display-5">Select Corner Style</h1>
+            <p class="lead text-muted">How should the corners of your project look?</p>
+             <div class="d-flex justify-content-center gap-2 mt-4">
+                <button class="btn btn-outline-secondary btn-lg">Rounded</button>
+                <button class="btn btn-outline-secondary btn-lg">Square</button>
+                <button class="btn btn-outline-secondary btn-lg">Chamfered</button>
+            </div>
+        </div>
+    </template>
+
+    <template id="base">
+        <div class="text-center">
+            <h1 class="display-5">Define the Base</h1>
+            <p class="lead text-muted">The base provides the foundation for the structure.</p>
+            <p class="text-muted mt-4"><small>Current time in Madison, WI is 8:08 AM.</small></p>
+        </div>
+    </template>
+
+    <template id="cap-type">
+        <div class="text-center">
+            <h1 class="display-5">Pick a Cap Type</h1>
+            <p class="lead text-muted">The cap sits on top of your project, providing a finished look.</p>
+        </div>
+    </template>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="start-script.js"></script>
+</body>
+</html>
