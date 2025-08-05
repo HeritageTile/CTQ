@@ -2,4 +2,44 @@ body {
     background-color: #f8f9fa; /* A light grey background from Bootstrap's color system */
 }
 
+.main-container {
+    display: flex;
+    width: 100vw;
+    height: 80vh;
+    gap: 20px;
+    background-color: white;
+    margin-bottom: 20px;
+    border-radius: 8px; /* Rounded corners for the main container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.image-3x3 {
+    width: 350px;
+    height: 235px;
+    border: 2px solid #dee2e6; /* Bootstrap's border color */
+    margin-top: 20px;
+    display: inline-block;
+}
+
+.image-3x3-caption {
+    width: 350px;
+    align-items: center;
+    display: flex;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* Add this new class to your style.css */
+.scrollable-grid-area {
+    /* Set a fixed height. The grid will scroll within this height. */
+    /* calc() subtracts the approximate height of the navbar and title from the viewport height. */
+    height: calc(100vh - 250px);
+    
+    /* This is the key property: it adds a vertical scrollbar ONLY when needed. */
+    overflow-y: auto;
+    
+    /* Add some padding to prevent content from touching the scrollbar. */
+    padding: 0 1rem;
+}
+
 /* The .active class from Bootstrap will handle the link styling automatically */

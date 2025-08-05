@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Use a single event listener on the nav container
     mainNav.addEventListener('click', (event) => {
-        if (event.target.matches('.nav-link')) {
+        if (event.target.matches('button')) {
             event.preventDefault(); // Stop the link from trying to navigate
             const viewId = event.target.dataset.view;
             switchView(viewId);
