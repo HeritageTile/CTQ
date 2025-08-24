@@ -26,7 +26,6 @@ body {
 }
 
 
-
 .main-container {
     display: flex;
     width: 100vw;
@@ -47,6 +46,15 @@ body {
     overflow: hidden;
 }
 
+.image-thumbnail {
+    width: 200px;
+    height: 175px;
+    border: 2px solid #dee2e6; /* Bootstrap's border color */
+    margin-top: 20px;
+    display: inline-block;
+    overflow: hidden;
+}
+
 .image-3x3-caption {
     width: 350px;
     align-items: center;
@@ -59,12 +67,18 @@ body {
 #scrollable-grid-area {
     /* Set a fixed height. The grid will scroll within this height. */
     /* calc() subtracts the approximate height of the navbar and title from the viewport height. */
-    height: calc(100vh - 200px);
+    height: calc(100vh - 150px);
     
     /* This is the key property: it adds a vertical scrollbar ONLY when needed. */
     overflow-y: auto;
     
     /* Add some padding to prevent content from touching the scrollbar. */
+    padding: 0 1rem;
+}
+
+.scrollable-area {
+    height: calc(100vh - 150px);
+    overflow-y: auto;
     padding: 0 1rem;
 }
 

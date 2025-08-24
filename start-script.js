@@ -37,27 +37,27 @@ const tile_component = {
     ],
     "corners": [
         {
-            "name": "Radius Cove & Bullnose (3⁄4\")",
+            "name": 'Radius Cove & Bullnose (3⁄4")',
             "image": "src/corner/Corner1.png"
         },
         {
-            "name": "Series 15 Radius Cove & Bullnose (11⁄2\")",
+            "name": 'Series 15 Radius Cove & Bullnose (11⁄2\")',
             "image": "src/corner/Corner2.png"
         },
         {
-            "name": "*Mitered Field Tile Inside Corner",
+            "name": '*Mitered Field Tile Inside Corner',
             "image": "src/corner/Corner3.png"
         },
         {
-            "name": "Quarter Cove & Round (3⁄4\")",
+            "name": 'Quarter Cove & Round (3⁄4\")',
             "image": "src/corner/Corner4.png"
         },
         {
-            "name": "Series 15 Quarter Cove & Round (11⁄2\")",
+            "name": 'Series 15 Quarter Cove & Round (11⁄2\")',
             "image": "src/corner/Corner5.png"
         },
         {
-            "name": "Mixed (Ex: Mitered Inside Corner & 06QR00)",
+            "name": 'Mixed (Ex: Mitered Inside Corner & 06QR00)',
             "image": "src/corner/Corner6.png"
         }
     ],
@@ -126,54 +126,130 @@ const tile_component = {
             "name": "Surface Cap",
             "image": "src/cap/Cap7.png"
         }
+    ],
+    'special-conditions': [
+        {
+            "name": "Niche",
+            "options": [
+                {
+                    "name": "Niche A",
+                    "images": ["src/special-condition/niche/niche_a_1.png", "src/special-condition/niche/niche_a_2.png"]
+                },
+                {
+                    "name": "Niche B",
+                    "images": ["src/special-condition/niche/niche_b_1.png", "src/special-condition/niche/niche_b_2.png"]
+                },
+                {
+                    "name": "Niche C",
+                    "images": ["src/special-condition/niche/niche_c_1.png", "src/special-condition/niche/niche_c_2.png"]
+                },
+                {
+                    "name": "Niche D",
+                    "images": ["src/special-condition/niche/niche_d_1.png", "src/special-condition/niche/niche_d_2.png"]
+                },
+                {
+                    "name": "Niche E",
+                    "images": ["src/special-condition/niche/niche_e_1.png", "src/special-condition/niche/niche_e_2.png"]
+                }
+            ],
+            "thumbnail": "src/special-condition/niche/thumbnail.png"
+        },
+        {
+            "name": "Niche 2",
+            "options": [
+                {
+                    "name": "Niche 1",
+                    "images": ["src/special-condition/niche/niche_a_1.png", "src/special-condition/niche/niche_a_2.png"]
+                },
+                {
+                    "name": "Niche 2",
+                    "images": ["src/special-condition/niche/niche_b_1.png", "src/special-condition/niche/niche_b_2.png"]
+                },
+                {
+                    "name": "Niche 3",
+                    "images": ["src/special-condition/niche/niche_c_1.png", "src/special-condition/niche/niche_c_2.png"]
+                },
+                {
+                    "name": "Niche 4",
+                    "images": ["src/special-condition/niche/niche_d_1.png", "src/special-condition/niche/niche_d_2.png"]
+                },
+                {
+                    "name": "Niche 5",
+                    "images": ["src/special-condition/niche/niche_e_1.png", "src/special-condition/niche/niche_e_2.png"]
+                }
+            ],
+            "thumbnail": "src/special-condition/niche/thumbnail.png"
+        },
+        {
+            "name": "Niche 2",
+            "options": [
+                {
+                    "name": "Niche 1",
+                    "images": ["src/special-condition/niche/niche_a_1.png", "src/special-condition/niche/niche_a_2.png"]
+                },
+                {
+                    "name": "Niche 2",
+                    "images": ["src/special-condition/niche/niche_b_1.png", "src/special-condition/niche/niche_b_2.png"]
+                },
+                {
+                    "name": "Niche 3",
+                    "images": ["src/special-condition/niche/niche_c_1.png", "src/special-condition/niche/niche_c_2.png"]
+                },
+                {
+                    "name": "Niche 4",
+                    "images": ["src/special-condition/niche/niche_d_1.png", "src/special-condition/niche/niche_d_2.png"]
+                },
+                {
+                    "name": "Niche 5",
+                    "images": ["src/special-condition/niche/niche_e_1.png", "src/special-condition/niche/niche_e_2.png"]
+                }
+            ],
+            "thumbnail": "src/special-condition/niche/thumbnail.png"
+        }
     ]
 }
 
+
 let selectedItems = [];
+let viewNotes = { inspirations: "", 'field-type': "", corners: "", base: "", 'cap-options': "", 'special-conditions': "" };
 
 
 document.addEventListener('DOMContentLoaded', () => {
 
     const mainNav = document.getElementById('main-nav');
     const contentArea = document.getElementById('main-content');
-    const navLinks = document.querySelectorAll('.nav-link');
     const navButtons = document.querySelectorAll('#main-nav button');
 
     let gridContainer = document.getElementById('scrollable-grid-area');
     const selectedItemsList = document.getElementById('selected-items-list');
     const selectedCountBadge = document.getElementById('selected-count-badge');
     let selectItemButton = document.getElementById('select-item-btn');
+
     let currentView = 'inspirations';
+    let currentSpecialCategory = 'Niche';
+
     const carouselModal = document.getElementById('carouselModal');
 
-
+    const viewTitleEl = document.getElementById('view-title');
+    const viewNotesBtn = document.getElementById('view-notes-btn');
+    const notesModal = document.getElementById('notesModal');
+    const notesModalInstance = new bootstrap.Modal(notesModal);
 
     function renderGridView(items) {
         gridContainer = document.getElementById('scrollable-grid-area');
-        if (!gridContainer) return; // Exit if no grid container is on the page
-
-
-        gridContainer.innerHTML = ''; // Clear previous grid items
-        const componentHtml = `
-        <div class="container d-flex justify-content-center">
-            <div class="card w-100 shadow-sm mt-2">
-            <div class="card-body">
-                <div class="text-center mb-4">
-                    <h1 class="display-5">Select Tile Style</h1>
-                    <p class="lead text-muted">Choose the tile style for your project.</p>
-                    </div>
-                <div id="scrollable-grid-area" class="row">`
-        items.forEach(item => {
+        if (!gridContainer) return;
+        gridContainer.innerHTML = ''; 
+        console.log(items)
+        items.forEach(item => {        
             const isSelected = selectedItems.some(selected => selected.name === item.name);
+            console.log(`Item: ${item.name}, Selected: ${isSelected}`, selectedItems);
             const itemHTML = `
-               
                         <div class="col-lg-4 col-md-6 pb-2 border border-1 ">
                             <div class="row text-center">
                                 <div class="col-12">
                                     <img src="${item.image}" class="image-3x3" alt="Rounded Corner">
                                 </div>
                             </div>
-
                             <div class="row d-flex justify-content-center mt-2">
                                 <div class="col-6 d-flex justify-content-start">
                                     <h5 class="card-title">${item.name}</h5>
@@ -181,13 +257,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <div class="col-6 d-flex justify-content-end">
                                     <div class="btn-group btn-group-sm" role="group">
                                         <button type="button" class="btn btn-theme1" id="select-item-btn" data-name="${item.name}" 
-                                            data-img-src="${item.image}" rounded-0><i
-                                                class="bi ${isSelected ? 'bi-check2-all' : 'bi-check2'}"></i></button>
-                                
-                                        <button type="button" class="btn btn-theme2 rounded-0" 
-                                            data-bs-toggle="modal" 
-                                            data-bs-target="#imageModal"
-                                            data-img-src="${item.image}">
+                                            data-img-src="${item.image}" rounded-0>
+                                            <i class="bi ${isSelected ? 'bi-check2-all' : 'bi-check2'}"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-theme2 rounded-0" data-bs-toggle="modal" data-bs-target="#imageModal"data-img-src="${item.image}">
                                             <i class="bi bi-three-dots"></i>
                                         </button>
                                     </div>
@@ -199,12 +272,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /**
-            * Renders carousels in a responsive grid.
-            */
     function renderInspirations() {
-
-        const container = contentArea.querySelector('#inspirations-container');
+        const container = contentArea.querySelector('#inspirations');
         if (!container) return;
 
         let carouselsRowHTML = '<div class="row g-4">';
@@ -216,8 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <img src="${imgSrc}" class="d-block w-100" alt="${style.name} - Image ${imgIndex + 1}">
                         </div>`).join('');
 
-            carouselsRowHTML += `
-                        <div class="col-md-6">
+            carouselsRowHTML += `<div class="col-md-6">
                             <div class="card h-100 shadow-sm">
                                 <div class="card-body p-0">
                                     <div id="${carouselId}" class="carousel slide" data-bs-ride="carousel">
@@ -249,6 +317,64 @@ document.addEventListener('DOMContentLoaded', () => {
         container.innerHTML = carouselsRowHTML;
     }
 
+    function renderSpecialConditions() {
+        const categoriesContainer = contentArea.querySelector('#special-conditions-categories');
+        if (!categoriesContainer) return;
+        let categoriesHTML = '';
+        tile_component['special-conditions'].forEach(category => {
+            categoriesHTML += `
+                        <div class="col-12">
+                            <div class="card shadow-sm category-card" data-category-name="${category.name}">
+                                <img src="${category.thumbnail}" class="card-img-top image-thumbnail" alt="${category.name}">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title m-0">${category.name}</h5>
+                                </div>
+                            </div>
+                        </div>`;
+        });
+        categoriesContainer.innerHTML = categoriesHTML;
+    }
+
+    function renderSpecialConditionOptions(categoryName) {
+        const optionsContainer = contentArea.querySelector('#special-conditions-options');
+        if (!optionsContainer) return;
+        const category = tile_component['special-conditions'].find(c => c.name === categoryName);
+        if (!category) return;
+        let optionsHTML = '';
+        const viewId = 'special-conditions';
+        category.options.forEach((item, itemIndex) => {
+            const isSelected = false; //selectedItems[viewId].some(selected => selected.name === item.name);
+            const carouselId = `special-carousel-${category.name}-${itemIndex}`;
+            const carouselItems = item.images.map((imgSrc, imgIndex) => `<div class="carousel-item ${imgIndex === 0 ? 'active' : ''}"><img src="${imgSrc}" class="d-block w-100 image-3x3" alt="${item.name} image ${imgIndex + 1}"></div>`).join('');
+            optionsHTML += `
+            <div class="col-md-6">
+                <div class="card h-100 shadow-sm">
+                    <div id="${carouselId}" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">${carouselItems}
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#${carouselId}" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#${carouselId}" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                    <div class="card-body d-flex justify-content-between align-items-center">
+                        <h5 class="card-title m-0">${item.name}</h5>
+                        <div class="btn-group btn-group-sm">
+                            <button type="button" class="btn ${isSelected ? 'btn-success' : 'btn-theme1'} check-button select-style-btn" data-view="${viewId}" data-name="${item.name}" data-img-src="${item.images[0]}">
+                                <i class="bi ${isSelected ? 'bi-check2-all' : 'bi-check2'}"></i>
+                            </button>
+                            <button type="button" class="btn btn-theme2 expand-carousel-btn" data-bs-toggle="modal" data-bs-target="#carouselModal" data-category-name="${category.name}" data-option-name="${item.name}">
+                                <i class="bi bi-arrows-angle-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+        });
+        optionsContainer.innerHTML = optionsHTML;
+    }
 
 
     function switchView(viewId) {
@@ -272,6 +398,9 @@ document.addEventListener('DOMContentLoaded', () => {
             contentArea.appendChild(template.content.cloneNode(true));
             if (viewId === 'inspirations') {
                 renderInspirations();
+            } else if (viewId === 'special-conditions') {
+                renderSpecialConditions();
+                renderSpecialConditionOptions(currentSpecialCategory);
             } else if (tile_component[viewId]) {
                 renderGridView(tile_component[viewId]);
             } else {
@@ -293,7 +422,6 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <img src="${item.src}" alt="${item.name}" class="me-3" style="width:50px; height:50px; object-fit:cover; border-radius: .25rem;">
                                 ${item.name}
                             </span>
-                            <!-- NEW: Remove button for each item -->
                             <button class="btn btn-sm btn-outline-danger remove-item-btn" data-index="${index}">
                                 <i class="bi bi-trash"></i>
                             </button>
@@ -312,16 +440,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectStyleButton = event.target.closest('.select-style-btn');
         const button = checkButton || selectStyleButton;
         if (!button) return;
-
         const itemName = button.getAttribute('data-name');
+        console.log(itemName)
         const itemImageSrc = button.getAttribute('data-img-src');
 
         if (!selectedItems.some(item => item.name === itemName)) {
-            
+
             selectedItems.push({ name: itemName, src: itemImageSrc });
             renderSelectedItems();
             if (currentView === 'inspirations') {
                 renderInspirations();
+            } else if (currentView === 'special-conditions') {
+                renderSpecialConditions();
+                renderSpecialConditionOptions(currentSpecialCategory);
             } else {
                 renderGridView(tile_component[currentView]);
             }
@@ -334,7 +465,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const indexToRemove = parseInt(removeButton.getAttribute('data-index'), 10);
 
-        // Remove the item from the array
         selectedItems.splice(indexToRemove, 1);
 
         // Re-render both the list and the main gallery to reflect the change
@@ -344,21 +474,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const imageModal = document.getElementById('imageModal');
     imageModal.addEventListener('show.bs.modal', function (event) {
-        // 'event.relatedTarget' is the button that triggered the modal
         const button = event.relatedTarget;
-
-        // Get the image URL from our custom 'data-img-src' attribute
         const imageUrl = button.getAttribute('data-img-src');
-
-        // Find the <img> tag inside the modal
         const modalImage = document.getElementById('modalImage');
-
-        // Update the modal's image 'src'
         modalImage.src = imageUrl;
-
-        // Optional: Update the modal title
         const modalTitle = document.getElementById('imageModalLabel');
-        // We can get the name from the card title if we navigate the DOM
         const cardBody = button.closest('.card-body');
         const cardTitle = cardBody.querySelector('.card-title').textContent;
         modalTitle.textContent = cardTitle;
@@ -370,32 +490,36 @@ document.addEventListener('DOMContentLoaded', () => {
         const proceedButton = event.target.closest('#proceed-button');
         if (proceedButton && selectedItems.length > 0) {
             selectedItemsModalInstance.hide();
-            selectedItems = []; // Clear selected items after proceeding
+            selectedItems = []; 
+            viewNotes = {}; 
         }
     });
 
     carouselModal.addEventListener('show.bs.modal', function (event) {
+        console.log(event)
         const button = event.relatedTarget;
-        const styleIndex = button.getAttribute('data-style-index');
-        const styleData = tile_component.inspirations[styleIndex];
         const modalBody = document.getElementById('carouselModalBody');
         const modalTitle = document.getElementById('carouselModalLabel');
-
+        let styleData;
+        let carouselIdSuffix;
+        if (button.hasAttribute('data-style-index')) {
+            const styleIndex = button.getAttribute('data-style-index');
+            styleData = tile_component.inspirations[styleIndex];
+            carouselIdSuffix = `inspiration-${styleIndex}`;
+        } else if (button.hasAttribute('data-category-name')) {
+            const categoryName = button.getAttribute('data-category-name');
+            const optionName = button.getAttribute('data-option-name');
+            const category = tile_component['special-conditions'].find(c => c.name === categoryName);
+            styleData = category.options.find(o => o.name === optionName);
+            carouselIdSuffix = `special-${categoryName}-${optionName}`.replace(/\s+/g, '-');
+        }
+        if (!styleData) return;
         modalTitle.textContent = styleData.name;
-
-        const carouselId = `carousel-modal-${styleIndex}`;
+        const carouselId = `carousel-modal-${carouselIdSuffix}`;
         const indicators = styleData.images.map((_, imgIndex) => `<button type="button" data-bs-target="#${carouselId}" data-bs-slide-to="${imgIndex}" class="${imgIndex === 0 ? 'active' : ''}"></button>`).join('');
         const items = styleData.images.map((imgSrc, imgIndex) => `<div class="carousel-item ${imgIndex === 0 ? 'active' : ''}"><img src="${imgSrc}" class="d-block w-100" alt="${styleData.name} - Image ${imgIndex + 1}"></div>`).join('');
-
-        modalBody.innerHTML = `
-                    <div id="${carouselId}" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-indicators">${indicators}</div>
-                        <div class="carousel-inner">${items}</div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#${carouselId}" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span></button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#${carouselId}" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span></button>
-                    </div>`;
+        modalBody.innerHTML = `<div id="${carouselId}" class="carousel slide" data-bs-ride="carousel"><div class="carousel-indicators">${indicators}</div><div class="carousel-inner">${items}</div><button class="carousel-control-prev" type="button" data-bs-target="#${carouselId}" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span></button><button class="carousel-control-next" type="button" data-bs-target="#${carouselId}" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span></button></div>`;
     });
-
 
 
     // Use a single event listener on the nav container
@@ -406,8 +530,57 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    contentArea.addEventListener('click', (event) => {
+        const categoryCard = event.target.closest('.category-card');
+        if (categoryCard) {
+            const categoryName = categoryCard.getAttribute('data-category-name');
+            renderSpecialConditionOptions(categoryName);
+            return;
+        }
+
+        const button = event.target.closest('.check-button, .select-style-btn');
+        if (!button) return;
+        const viewId = button.getAttribute('data-view');
+        const itemName = button.getAttribute('data-name');
+        const itemImageSrc = button.getAttribute('data-img-src');
+        const isAlreadySelected = selectedItems.some(item => item.name === itemName);
+        if (isAlreadySelected) {
+            selectedItems = selectedItems.filter(item => item.name !== itemName);
+            button.innerHTML = `<i class="bi bi-check2"></i>`;
+        } else {
+            selectedItems.push({ name: itemName, src: itemImageSrc });
+            button.innerHTML = `<i class="bi bi-check2-all"></i>`;
+        }
+        renderSelectedItems();
+    });
+
+    //notes 
+
+    notesModal.addEventListener('show.bs.modal', function (event) {
+        const formattedTitle = currentView.replace(/-/g, ' ').replace(/\b\w/g, char => char.toUpperCase());
+
+        document.getElementById('note-item-name').textContent = formattedTitle;
+        const saveBtn = document.getElementById('save-note-btn');
+        saveBtn.dataset.view = currentView;
+
+        document.getElementById('note-textarea').value = viewNotes[currentView] || '';
+    });
+
+    document.getElementById('save-note-btn').addEventListener('click', function () {
+        const viewId = this.dataset.view;
+        const noteText = document.getElementById('note-textarea').value;
+        viewNotes[viewId] = noteText;
+
+        if (noteText) {
+            viewNotesBtn.classList.replace('btn-outline-secondary', 'btn-secondary');
+        } else {
+            viewNotesBtn.classList.replace('btn-secondary', 'btn-outline-secondary');
+        }
+
+        notesModalInstance.hide();
+    });
+
     // Load the initial 'inspirations' view when the page first opens
     switchView('inspirations');
     renderSelectedItems();
-
 });
